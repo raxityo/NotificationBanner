@@ -7,9 +7,8 @@
 
 import UIKit
 
-extension UIWindow {
-
-    public var width: CGFloat {
+public extension UIWindow {
+    var width: CGFloat {
         let orientation = UIDevice.current.orientation
         switch orientation {
         case .landscapeLeft, .landscapeRight:
@@ -21,7 +20,7 @@ extension UIWindow {
         }
     }
 
-    public var height: CGFloat {
+    var height: CGFloat {
         let orientation = UIDevice.current.orientation
         switch orientation {
         case .landscapeLeft, .landscapeRight:
@@ -32,5 +31,15 @@ extension UIWindow {
             return frame.height
         }
     }
-
 }
+
+#if os(tvOS)
+    enum UIDeviceOrientation {
+        case landscape, portrait
+        var isLandscape: Bool { true }
+    }
+
+    extension UIDevice {
+        var orientation: UIDeviceOrientation { .landscape }
+    }
+#endif
