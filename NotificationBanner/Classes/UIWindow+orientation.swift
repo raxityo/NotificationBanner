@@ -9,6 +9,9 @@ import UIKit
 
 public extension UIWindow {
     var width: CGFloat {
+        #if os(tvOS)
+        return UIScreen.main.bounds.width
+        #else
         let orientation = UIDevice.current.orientation
         switch orientation {
         case .landscapeLeft, .landscapeRight:
@@ -18,9 +21,13 @@ public extension UIWindow {
         default:
             return frame.width
         }
+        #endif
     }
 
     var height: CGFloat {
+        #if os(tvOS)
+        return UIScreen.main.bounds.height
+        #else
         let orientation = UIDevice.current.orientation
         switch orientation {
         case .landscapeLeft, .landscapeRight:
@@ -30,6 +37,7 @@ public extension UIWindow {
         default:
             return frame.height
         }
+        #endif
     }
 }
 
